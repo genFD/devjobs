@@ -2,6 +2,7 @@
   "name": "devjobsvite",
   "version": "1.0.0",
   "description": "",
+  "homepage": "v1/jobs/",
   "main": "index.js",
   "scripts": {
     "start": "node backend/server.js",
