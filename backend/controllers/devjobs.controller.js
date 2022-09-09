@@ -2,14 +2,14 @@ const db = require('../db/');
 const { StatusCodes } = require('http-status-codes');
 
 const getDevjobs = async (req, res) => {
-  const { rows } = await db.query('SELECT * FROM dev_jobs');
+  const { rows } = await db.query('SELECT * FROM jobs');
   res.status(StatusCodes.OK).json(rows);
 };
 
 const getSinglejob = async (req, res) => {
   const { id } = req.params;
   const query = {
-    text: 'SELECT * FROM dev_jobs WHERE id = $1',
+    text: 'SELECT * FROM jobs WHERE id = $1',
     values: [id],
   };
   const { rows } = await db.query(query);
@@ -19,7 +19,7 @@ const getSinglejob = async (req, res) => {
 const filterByLocation = async (req, res) => {
   const { location } = req.query;
   const query = {
-    text: "SELECT * FROM dev_jobs WHERE content ->> 'location' ILIKE $1",
+    text: "SELECT * FROM jobs WHERE content ->> 'location' ILIKE $1",
     values: [`%${location}%`],
   };
   const { rows } = await db.query(query);
@@ -29,7 +29,7 @@ const filterByLocation = async (req, res) => {
 const filterByContract = async (req, res) => {
   const { contract } = req.query;
   const query = {
-    text: "SELECT * FROM dev_jobs WHERE content ->> 'contract' ILIKE $1",
+    text: "SELECT * FROM jobs WHERE content ->> 'contract' ILIKE $1",
     values: [`%${contract}%`],
   };
   const { rows } = await db.query(query);
@@ -39,7 +39,7 @@ const filterByContract = async (req, res) => {
 const filterDevjobs = async (req, res) => {
   const { company, position, expertise } = req.query;
   const query = {
-    text: "SELECT * FROM dev_jobs WHERE content ->> 'company' ILIKE $1 OR content ->> 'position' ILIKE $2 OR content -> 'requirements' ->> 'items' ILIKE $3",
+    text: "SELECT * FROM jobs WHERE content ->> 'company' ILIKE $1 OR content ->> 'position' ILIKE $2 OR content -> 'requirements' ->> 'items' ILIKE $3",
     values: [`%${company}%`, `%${position}%`, `%${expertise}%`],
   };
   const { rows } = await db.query(query);

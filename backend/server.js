@@ -12,5 +12,5 @@ app.use(express.json());
 dotenv.config();
 
 const PORT = process.env.PORT || 6000;
-
+console.log(process.env.DB_URL);
 app.listen(PORT, console.log(`SERVER IS LISTENING ON PORT ${PORT}`.success));
