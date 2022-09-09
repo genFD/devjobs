@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 const AppContext = React.createContext();
 
-const API_URL = '/v1/devjobs/jobs/';
+const API_URL = '/v1/jobs/';
 
 const AppProvider = ({ children }) => {
   /* ------------------- */
